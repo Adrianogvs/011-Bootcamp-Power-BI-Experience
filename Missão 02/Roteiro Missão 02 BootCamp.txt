@@ -1,0 +1,136 @@
+MISSÃO 02 BOOTCAMP POWER BI - Vendas B2B
+================================================================================================
+Considerações:
+================================================================================================
+- Separar o faturamento líquido (Net Sales) por Categoria de Produto e por Supervisor de Vendas;
+- Carga enorme de trabalho repetitivo todo início de mês;
+- Pedro deseja receber desta equipe apenas um arquivo consolidado com todos os supervisores e todas as categorias de produto;
+- Ele solicitou que, neste arquivo consolidado, esteja presente uma análise de quais meses os supervisores atingiram a sua meta mensal de vendas;
+- Base manual de cadastro de vendedores e suas respectivas metas, ERP da empresa não possibilita esse cadastro das metas por Vendedor.
+- Considere então que a meta mensal dos supervisores seja igual à soma das metas individuais dos vendedores dele;
+
+================================================================================================
+OBJETIVOS
+================================================================================================
+
+ok	1. Importar os quatro arquivos de vendas dos Supervisores e consolidar os dados em uma única tabela dentro do Power BI. ok
+
+	2. Importar no Power BI a tabela de Vendedores que possui o valor da meta mensal e realizar uma análise de Faturamento Líquido (Net Sales) x Meta Mensal (Month Target) para os supervisores, 
+         para saber em quais meses cada um dos supervisores atingiu a meta.
+
+Dica: Lembrando que a meta dos supervisores pode ser considerada como a soma das metas dos seus vendedores
+	
+	3. No momento a HPN só possui cadastro de meta por vendedor, que é fixa ao longo dos meses. Porém Pedro gostaria de ter um indicativo de comparação do Faturamento Líquido com a Meta do supervisor 
+         quebrando também por categoria de produto. Portanto distribua a meta mensal para as categorias de produto utilizando a linguagem DAX, aplicando uma regra de rateio que você considere adequada.
+
+Dica: Crie uma matriz e coloque o Supervisor e a Categoria do Produto nas Linhas. Ao descer no nível de Categoria você perceberá que o valor da meta ficará constante. 
+      É esse valor que Pedro gostaria que fosse calculado através de um rateio entre as categorias.
+
+	4. Por mais que a gente consiga realizar esta análise consolidada que Pedro solicitou, o processo ainda está longe do ideal. 
+         Portanto escreva em uma caixa de texto dentro do relatório o que você sugere para otimizarmos o trabalho de atualização deste relatório. Além disso, 
+         você enxerga outros problemas que Pedro pode enfrentar no momento de analisar os valores vindos da equipe de Marketing, da Missão #01, e os valores vindos da equipe de Vendas, da Missão #02? 
+         O que você sugere a ele para minimizar esses riscos? Escreva junto nesta mesma caixa de texto.
+
+================================================================================================
+EXTRAÇÃO | ESTRUTURAÇÃO | MODELAGEM | CÁLCULOS | VISUAIS | DISTRIBUIÇÃO | AUTOMATIZAÇÃO
+================================================================================================
+1 - ETL
+================================================================================================
+- Importar as planilhas de vendas;
+- Importar as planilhas de meta;
+- Configurar de forma que fique automatizado;
+- Tratar os dados das Planilhas para que tenhamos a base pronta para a proxima etapa;
+================================================================================================
+2 - ESTRUTURAÇÃO
+================================================================================================
+- Criar dimensões;
+- Criar tabelas fato;
+================================================================================================
+3 - MODELAGEM
+================================================================================================
+- Criar os relacionamentos;
+================================================================================================
+4 - CÁLCULOS
+================================================================================================
+-$ Total Net Sales M2 = SUM(Ft_SalesSup[Valor])
+-$Total Net Sales by Category = 
+    CALCULATE(
+        [$ Total Net Sales M2],
+        ALL(Dim_Cat),
+        VALUES(Ft_SalesSup[Valor]))
+-Dif. Target x Sales = [$ Total Net Sales M2] - [Total Target]
+-Share Net Sales by target = DIVIDE([$ Total Net Sales M2],[Total Target 1])
+-Share NetSales by Category = 
+    DIVIDE([$ Total Net Sales M2],
+    CALCULATE(
+        [$ Total Net Sales M2],
+        ALL(Dim_Cat[Category]),
+        VALUE(Ft_SalesSup[Valor])))
+-Target by Cat 1 - Fix = ([Target by Category] / 12) *11
+-Target by Cat 2 = [Share NetSales by Category] * [Total Target 1]
+-Target by Category = [Share NetSales by Category] * [Total Target]
+-Total Target = SUM(Ft_Target[Target])
+-Total Target 1 = //CALCULO PARA CHEGAR NA META GERAL DE FORMA DINAMICA
+VAR TESTE = 
+    CALCULATE(
+    [Total Target], 
+    _DCalendario[Date] < MAX(Ft_SalesSup[Date]),
+    Ft_SalesSup[Valor] <> BLANK())
+    RETURN TESTE
+================================================================================================
+5 - VISUAIS
+================================================================================================
+-
+================================================================================================
+QUESTÕES DO DESAFIO
+================================================================================================
+*1. Qual região do país tem a pior margem percentual no ano todo?(Levar em conta a M1)
+
+a. Sudeste
+b. Norte
+c. Sul 🎖️
+d. Centro-Oeste
+e. Nordeste
+
+*2. Considerando os meses em que houve faturamento, qual a diferença em $ do Faturamento Líquido em relação ao Target para todos os vendedores?
+
+a. - $1.447.768
+b. - $858.819
+c. - $758.819
+d. - $1.180.268 🎖️
+
+*3. Quais estados conseguiram superar suas metas (Target) no acumulado do ano?
+
+a. MG e RJ
+b. MG e SP 🎖️
+c. SP e RJ
+d. BA e MG
+
+*4. Qual o percentual de atingimento da meta (Faturamento Líquido / Target) no primeiro trimestre para todas as regiões?
+
+a. 50,49% 🎖️
+b. 38,27%
+c. 79,57%
+d. 55,36%
+
+*5. Qual o mês teve a maior diferença negativa entre o Faturamento Líquido Realizado e o Target?
+
+a. Dezembro
+b. Junho 🎖️
+c. Março
+d. Novembro
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
