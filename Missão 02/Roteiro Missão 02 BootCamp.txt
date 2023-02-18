@@ -15,21 +15,20 @@ OBJETIVOS
 
 ok	1. Importar os quatro arquivos de vendas dos Supervisores e consolidar os dados em uma única tabela dentro do Power BI. ok
 
-	2. Importar no Power BI a tabela de Vendedores que possui o valor da meta mensal e realizar uma análise de Faturamento Líquido (Net Sales) x Meta Mensal (Month Target) para os supervisores, 
-         para saber em quais meses cada um dos supervisores atingiu a meta.
+	2. Importar no Power BI a tabela de Vendedores que possui o valor da meta mensal e realizar uma análise de Faturamento Líquido (Net Sales) x Meta Mensal (Month Target) para os supervisores, para saber em quais meses cada um dos supervisores atingiu a meta.
 
 Dica: Lembrando que a meta dos supervisores pode ser considerada como a soma das metas dos seus vendedores
 	
-	3. No momento a HPN só possui cadastro de meta por vendedor, que é fixa ao longo dos meses. Porém Pedro gostaria de ter um indicativo de comparação do Faturamento Líquido com a Meta do supervisor 
-         quebrando também por categoria de produto. Portanto distribua a meta mensal para as categorias de produto utilizando a linguagem DAX, aplicando uma regra de rateio que você considere adequada.
+	3. No momento a HPN só possui cadastro de meta por vendedor, que é fixa ao longo dos meses. 
+        Porém Pedro gostaria de ter um indicativo de comparação do Faturamento Líquido com a Meta do supervisor quebrando também por categoria de produto. 
+        Portanto distribua a meta mensal para as categorias de produto utilizando a linguagem DAX, aplicando uma regra de rateio que você considere adequada.
 
 Dica: Crie uma matriz e coloque o Supervisor e a Categoria do Produto nas Linhas. Ao descer no nível de Categoria você perceberá que o valor da meta ficará constante. 
       É esse valor que Pedro gostaria que fosse calculado através de um rateio entre as categorias.
 
 	4. Por mais que a gente consiga realizar esta análise consolidada que Pedro solicitou, o processo ainda está longe do ideal. 
-         Portanto escreva em uma caixa de texto dentro do relatório o que você sugere para otimizarmos o trabalho de atualização deste relatório. Além disso, 
-         você enxerga outros problemas que Pedro pode enfrentar no momento de analisar os valores vindos da equipe de Marketing, da Missão #01, e os valores vindos da equipe de Vendas, da Missão #02? 
-         O que você sugere a ele para minimizar esses riscos? Escreva junto nesta mesma caixa de texto.
+        Portanto escreva em uma caixa de texto dentro do relatório o que você sugere para otimizarmos o trabalho de atualização deste relatório. 
+        Além disso, você enxerga outros problemas que Pedro pode enfrentar no momento de analisar os valores vindos da equipe de Marketing, da Missão #01, e os valores vindos da equipe de Vendas, da Missão #02? O que você sugere a ele para minimizar esses riscos? Escreva junto nesta mesma caixa de texto.
 
 ================================================================================================
 EXTRAÇÃO | ESTRUTURAÇÃO | MODELAGEM | CÁLCULOS | VISUAIS | DISTRIBUIÇÃO | AUTOMATIZAÇÃO
